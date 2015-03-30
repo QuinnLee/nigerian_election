@@ -182,6 +182,14 @@
       }
     }
 
+    function removeZeroBins(group) {
+      return {
+        all: function() {
+          return group.all().filter(function(d) { return d.value > 0; });
+        }
+      }
+    }
+
     var publishedAtDateChart = dc.lineChart('#published-at-date-chart');
     var authorChart = dc.barChart('#author-chart');
     var locationViolenceChart = dc.barChart('#location-violence-count-chart');
@@ -317,7 +325,7 @@
         .height(250)
         .margins({top: 30, right: 10, bottom: 55, left: 35})
         .dimension(locationDimension)
-        .group(removeNoneBins(locationViolenceGroup))
+        .group(removeZeroBins(locationViolenceGroup))
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
